@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Coffee E-Shop</title>
+		<title>Coffee Shop</title>
+
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<slot />
@@ -14,10 +18,10 @@
 
 <style is:global>
 	@import "tailwindcss";
-	@plugin "@midudev/tailwind-animations";
-
 	body {
-		background: #db5d2d;
+		font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+		background: white;
+		color: white;
 	}
 	html,
 	body {
