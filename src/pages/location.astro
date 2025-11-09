@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <main class="flex flex-col gap-5 min-h-[calc(100vh-91px)]">
+    <header class="flex justify-center items-center h-16 bg-[#785034] shadow-md mb-5 font-bold text-white text-xl">
+        <h1>Our Location</h1>
+    </header>
+    <section class="flex items-center justify-center">
+        <iframe class="w-[calc(100%-2rem)] h-96 shadow-md"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15665.577650183217!2d-74.83624730570772!3d11.009005695880022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42da393453c5d%3A0x7aad0b2ca4683ed6!2sStarbucks%20Viva%20Barranquilla!5e0!3m2!1ses-419!2sco!4v1762715326162!5m2!1ses-419!2sco"
+          allowfullscreen="true"
+          loading="lazy"
+        ></iframe>
+    </section>
+  </main>
+
+<footer class="bg-[#233F4C] h-24">
+    <div class="flex flex-col items-center justify-center pt-4 text-white font-light text-sm gap-2">
+      <p> Copyright 2025. All rights reserved.</p>
+      <p>Made by Andrés Retamoso</p>
+    </div>
+</footer>
+</Layout>
