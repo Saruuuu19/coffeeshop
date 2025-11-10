@@ -1,20 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro"
+import Header from "../components/Header.astro";
 ---
-
 <Layout>
-<header class="bg-white h-12 flex items-center mx-5 justify-end">
-    <nav class="max-w-screen max-h-12">
-        <button class="flex items-center justify-center h-10 w-10 hover:bg-gray-200 rounded-full ease-in-out duration-50">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 48 48" fill="none">
-				<path d="M8.00001 36C7.43334 36 6.95867 35.808 6.57601 35.424C6.19334 35.04 6.00134 34.5653 6.00001 34C5.99867 33.4347 6.19067 32.96 6.57601 32.576C6.96134 32.192 7.43601 32 8.00001 32H40C40.5667 32 41.042 32.192 41.426 32.576C41.81 32.96 42.0013 33.4347 42 34C41.9987 34.5653 41.8067 35.0407 41.424 35.426C41.0413 35.8113 40.5667 36.0027 40 36H8.00001ZM8.00001 26C7.43334 26 6.95867 25.808 6.57601 25.424C6.19334 25.04 6.00134 24.5653 6.00001 24C5.99867 23.4347 6.19067 22.96 6.57601 22.576C6.96134 22.192 7.43601 22 8.00001 22H40C40.5667 22 41.042 22.192 41.426 22.576C41.81 22.96 42.0013 23.4347 42 24C41.9987 24.5653 41.8067 25.0407 41.424 25.426C41.0413 25.8113 40.5667 26.0027 40 26H8.00001ZM8.00001 16C7.43334 16 6.95867 15.808 6.57601 15.424C6.19334 15.04 6.00134 14.5653 6.00001 14C5.99867 13.4347 6.19067 12.96 6.57601 12.576C6.96134 12.192 7.43601 12 8.00001 12H40C40.5667 12 41.042 12.192 41.426 12.576C41.81 12.96 42.0013 13.4347 42 14C41.9987 14.5653 41.8067 15.0407 41.424 15.426C41.0413 15.8113 40.5667 16.0027 40 16H8.00001Z" fill="black"/>
-			</svg>
-        </button>
-    </nav>
+<Header />
 
-</header>
-
-<main>
+<main class="grow">
   <!-- Pre-main -->
   <section aria-labelledby="hero-title">
     <div class="bg-[#785034]">
@@ -22,7 +14,7 @@ import Layout from "../layouts/Layout.astro";
         <h1 id="hero-title" class="text-base font-bold text-white text-center">
           It's a great day for a coffee!
         </h1>
-        <a href="/order" class="inline-flex items-center rounded-full border-2 border-white/80 px-3 py-1.5 text-xs font-semibold hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white text-white text-center">Start an order</a>
+        <a href="/Menu" class="inline-flex items-center rounded-full border-2 border-white/80 px-3 py-1.5 text-xs font-semibold hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white text-white text-center">Start an order</a>
       </div>
     </div>
 
@@ -34,10 +26,10 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- Text Content -->
       <div class="bg-[#265738] flex flex-col items-center justify-center px-8 py-12 md:px-16">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center text-white">
           Elevate your routine with fresh coffee!
         </h2>
-        <p class="text-base md:text-lg font-light mb-6 text-center">
+        <p class="text-base md:text-lg font-light mb-6 text-center text-white">
           Experience coffee as it was meant to be.
         </p>
       </div>
@@ -45,23 +37,18 @@ import Layout from "../layouts/Layout.astro";
   </section>
   <!-- Main -->
    <section class="flex flex-col gap-6 items-center my-12">
-    <a href="/menu" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
+    <a href="/Menu" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
 		<span>Our Menu</span>
     </a>
-    <a href="/location" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
+    <a href="/Location" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
 		<span>Location</span>
     </a>
-    <a href="/about" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
+    <a href="/About" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
 		<span>About us</span>
     </a>
    </section>
 </main>
 
-<footer class="bg-[#233F4C]">
-    <div class="flex flex-col items-center justify-center py-4 text-white font-light text-sm gap-2">
-      <p>© Copyright 2025. All rights reserved.</p>
-      <p>Made by Andrés Retamoso</p>
-    </div>
-</footer>
+<Footer />
 
 </Layout>

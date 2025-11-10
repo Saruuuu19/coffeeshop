@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="About Us - Fresh Coffee">
+    <Header />
+    
+    <main class="grow">
+        <section class="py-10 text-center">
+            <div class="max-w-4xl mx-auto px-4">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-[#233F4C]">
+                    Our Story
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 font-light">
+                    From a single bean to your daily ritual.
+                </p>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto py-5 px-4 md:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                
+                <div>
+                    <h2 class="text-3xl font-bold mb-5 pb-2 text-[#233F4C] border-b-2 border-[#B45F3D]/50">
+                        Our Purpose
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                        We are a specialty coffee roaster committed to transparency and quality. 
+                        Our dedication starts at the farm, where we ensure sustainable practices 
+                        and fair compensation for our partners. We strive to deliver not just a drink, 
+                        but an exceptional sensory experience with every cup.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed italic border-l-4 border-[#B45F3D] pl-4">
+                        "Brewing connections, one perfect cup at a time."
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-bold mb-5 pb-2 text-[#233F4C] border-b-2 border-[#B45F3D]/50">
+                        Our Core Values
+                    </h2>
+                    <dl class="space-y-6">
+                        <div class="flex">
+                            <span class="text-3xl text-[#B45F3D] mr-4">🌱</span>
+                            <div>
+                                <dt class="font-semibold text-xl text-gray-900">Sustainability</dt>
+                                <dd class="text-gray-600">We prioritize environmentally conscious methods in sourcing and operation.</dd>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <span class="text-3xl text-[#B45F3D] mr-4">✨</span>
+                            <div>
+                                <dt class="font-semibold text-xl text-gray-900">Excellence</dt>
+                                <dd class="text-gray-600">Committed to perfection from the roast profile to the pour.</dd>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <span class="text-3xl text-[#B45F3D] mr-4">🤝</span>
+                            <div>
+                                <dt class="font-semibold text-xl text-gray-900">Community</dt>
+                                <dd class="text-gray-600">Creating a welcoming space for dialogue and enjoyment.</dd>
+                            </div>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="relative mt-10">
+            <img 
+                src="/src/assets/premain-image.svg" 
+                alt="Image representing dedication to coffee making" 
+                class="w-full h-80 object-cover opacity-80" 
+            />
+            <div class="absolute inset-0 flex items-center justify-center bg-gray-900/40">
+                <p class="text-3xl md:text-4xl font-light italic text-white text-center px-4">
+                    "Crafted with care, served with passion."
+                </p>
+            </div>
+        </section>
+
+        <section class="text-center my-20">
+             <h2 class="text-3xl font-bold mb-4 text-[#233F4C]">
+                Experience the difference now!
+             </h2>
+             <a href="/menu" class="inline-flex items-center rounded-full bg-[#B45F3D] px-8 py-3 text-lg font-bold text-white hover:bg-[#B45F3D]/90 transition duration-300 shadow-md">
+                 See Our Full Menu
+             </a>
+        </section>
+
+    </main>
+
+    <Footer />
+</Layout>
