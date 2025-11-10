@@ -1,46 +1,44 @@
-# Astro Starter Kit: Basics
+# ☕ CoffeeCo. Landing Page
 
-```sh
-pnpm create astro@latest -- --template basics
+A modern, high-performance landing page for a specialty coffee shop built with **Astro** and **Tailwind CSS**. This project focuses on fast loading times and an excellent user experience by leveraging Static Site Generation (SSG).
+
+---
+
+## ✨ Key Features
+
+This project utilizes advanced web development techniques to ensure speed and efficiency:
+
+* **Extreme Performance (Astro):** The site is delivered as **zero-JavaScript** static HTML by default, resulting in near-instantaneous load times.
+* **Component Islands:** Uses **Preact** for isolated interactivity (the Mobile Hamburger Menu), ensuring that interactivity is only loaded where absolutely necessary.
+* **Modern, Responsive Design:** Styled using **Tailwind CSS** for a clean, elegant, and mobile-first user interface.
+* **Static Data Generation:** The menu and other dynamic content are built at compile-time by iterating over a local data source (`menu.js`), making the site fast and robust.
+* **Sticky Footer:** Implemented using modern Flexbox (`flex-grow` in the `<main>` container) to ensure the footer always stays at the bottom of the viewport.
+
+---
+
+## 🚀 Installation and Local Usage
+
+Follow these steps to get the project running on your local machine.
+
+### Prerequisites
+
+You must have [Node.js](https://nodejs.js.org/) installed.
+
+### 1. Clone the Repository
+
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd your-project-name
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+### 2. Install Dependencies
+```bash
+pnpm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### 3. Start the development server
+```bash
+pnpm run dev
+```
 
-## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
