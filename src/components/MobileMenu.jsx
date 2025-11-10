@@ -53,10 +53,10 @@ export default function MobileMenu() {
         {/* Enlaces del Menú */}
         <ul class="flex flex-col p-4 space-y-2">
           <li><a href="/" class="block px-3 py-2 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg">Home</a></li>
-          <li><a href="/Menu" class="block px-3 py-2 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg">Our Menu</a></li>
-          <li><a href="/Location" class="block px-3 py-2 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg">Location</a></li>
-          <li><a href="/About" class="block px-3 py-2 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg">About us</a></li>
-          <li class="pt-4"><a href="/Menu" class="block text-center px-4 py-2 bg-[#B45F3D] text-white rounded-full font-bold hover:bg-[#B45F3D]/90">Start an order</a></li>
+          <li><a href="/menu" class="block px-3 py-2 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg">Our Menu</a></li>
+          <li><a href="/location" class="block px-3 py-2 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg">Location</a></li>
+          <li><a href="/about" class="block px-3 py-2 text-lg font-medium text-gray-700 hover:bg-gray-100 rounded-lg">About us</a></li>
+          <li class="pt-4"><a href="/menu" class="block text-center px-4 py-2 bg-[#B45F3D] text-white rounded-full font-bold hover:bg-[#B45F3D]/90">Start an order</a></li>
         </ul>
       </nav>
       
