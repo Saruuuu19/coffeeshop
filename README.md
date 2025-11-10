@@ -1,44 +1,38 @@
-# ☕ CoffeeCo. Landing Page
+# ☕ CoffeeCo.
 
-A modern, high-performance landing page for a specialty coffee shop built with **Astro** and **Tailwind CSS**. This project focuses on fast loading times and an excellent user experience by leveraging Static Site Generation (SSG).
-
----
-
-## ✨ Key Features
-
-This project utilizes advanced web development techniques to ensure speed and efficiency:
-
-* **Extreme Performance (Astro):** The site is delivered as **zero-JavaScript** static HTML by default, resulting in near-instantaneous load times.
-* **Component Islands:** Uses **Preact** for isolated interactivity (the Mobile Hamburger Menu), ensuring that interactivity is only loaded where absolutely necessary.
-* **Modern, Responsive Design:** Styled using **Tailwind CSS** for a clean, elegant, and mobile-first user interface.
-* **Static Data Generation:** The menu and other dynamic content are built at compile-time by iterating over a local data source (`menu.js`), making the site fast and robust.
-* **Sticky Footer:** Implemented using modern Flexbox (`flex-grow` in the `<main>` container) to ensure the footer always stays at the bottom of the viewport.
+This project is a modern landing page for a coffee shop, built primarily as a demonstration of skills in **Static Site Generation (SSG)** and **Component Islands**.
 
 ---
 
-## 🚀 Installation and Local Usage
+## 🎯 Core Learning Objectives
 
-Follow these steps to get the project running on your local machine.
+This project was a practical exercise to master high-performance front-end architecture:
 
-### Prerequisites
+* **Astro & SSG:** Focused on building an ultra-fast website by utilizing Astro's Static Site Generation to deliver **zero-JavaScript** by default.
+* **Component Islands (Preact):** Implemented the mobile hamburger menu using **Preact** and the `client:load` directive. This demonstrates **selective hydration**, isolating interactivity to keep the rest of the site purely static. 
+* **Tailwind CSS:** Used for quick, efficient styling and implementing a **responsive, mobile-first** design aesthetic.
+* **Data Handling:** Practiced fetching local data (`menu.js`) and iterating over it to generate HTML during the **build phase** (compile-time).
 
-You must have [Node.js](https://nodejs.js.org/) installed.
+---
 
-### 1. Clone the Repository
+## 🛠️ Tech Stack Overview
 
-```bash
-git clone [YOUR_REPOSITORY_URL]
-cd your-project-name
-```
+| Technology | Role |
+| :--- | :--- |
+| **Astro** | Static Site Generator (SSG) |
+| **Tailwind CSS** | Utility-First Styling |
+| **Preact** | Micro-Library for Component Islands |
 
-### 2. Install Dependencies
-```bash
-pnpm install
-```
+---
 
-### 3. Start the development server
-```bash
-pnpm run dev
-```
+## 🚀 Get Started
 
+1.  **Clone:** `git clone https://github.com/andresretamoso/coffeeshop.git`
+2.  **Install:** `npm install`
+3.  **Run Dev Server:** `npm run dev`
 
+---
+
+## 📝 Credits
+
+* **Developer:** [Andrés Retamoso]
