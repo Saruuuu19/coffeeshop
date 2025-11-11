@@ -14,6 +14,7 @@
     "@midudev/tailwind-animations": "^0.2.0",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "5.15.3",
+    "contentful": "^11.8.12",
     "preact": "^10.27.2",
     "tailwindcss": "^4.1.16"
   }

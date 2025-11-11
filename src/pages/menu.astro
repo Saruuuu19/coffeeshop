@@ -2,9 +2,30 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { menuItems } from "../data/menu.js";
+import client from "../lib/contentful.js"; // [cite: 35]
 
- //Agrupamos los items por categoría
+// FETCH DE DATOS DESDE CONTENTFUL EN TIEMPO DE COMPILACIÓN [cite: 36]
+const response = await client.getEntries({
+    // Usa el API Identifier de tu modelo de contenido (que es 'menuItem') [cite: 36]
+    content_type: 'menuItem', 
+    // Opcional: Ordena los resultados por categoría [cite: 36]
+    order: ['fields.category'], 
+});
+
+
+// 3. Mapea la respuesta de Contentful a un array limpio. [cite: 37]
+// Los datos reales del producto están anidados dentro de 'fields'. [cite: 38]
+// El nombre que pusiste en Contentful era 'name', 'price', etc. [cite: 39]
+const menuItems = response.items.map(item => ({
+    ...item.fields,
+    // CORRECCIÓN CLAVE: Obtener la URL del asset de la imagen (está anidada en la respuesta)
+    // Se asume que el campo Media se llama 'productImage' y que existe en el objeto 'fields'.
+    // @ts-ignore
+    imageUrl: item.fields.productImage?.fields?.file?.url ? `https:${item.fields.productImage?.fields?.file?.url}` : null,
+}));
+
+// Agrupamos los items por categoría [cite: 40]
+// @ts-ignore
 const categories = [...new Set(menuItems.map(item => item.category))]
 ---
 
@@ -16,27 +37,43 @@ const categories = [...new Set(menuItems.map(item => item.category))]
         </header>
 
         {
-            //Iterar sobre las categorías
+            //Iterar sobre las categorías [cite: 41]
             categories.map(category => (
                 <section class="mb-2">
                     <h2 class="text-3xl font-semibold ml-2">
                         {category}
                     </h2>
-                    
+               
                     {/* Iterar sobre los ítems dentro de la categoría */}
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {menuItems
-                            .filter(item => item.category === category)
-                            .map(item => (
+                  
+                        .filter((item: any) => item.category === category)
+
+                            .map((item: any) => (
                                 <article class="bg-white shadow-lg rounded-2xl transition hover:shadow-xl m-3">
-                                    {<img src={`/premain-image.svg`} alt={item.name} class="w-full h-40 object-cover mb-3" />}
+                  
+                                    {/* CORRECCIÓN: Usar la URL optimizada y verificada */}
+                                    {item.imageUrl && (
+                                        <img 
+                                            src={`${item.imageUrl}?w=400&h=300&fit=fill`} 
+                                            alt={item.name} 
+                                            class="w-full h-40 object-cover rounded-t-2xl mb-3" 
+                                        />
+                                    )}
+                                    
                                     <div class="flex flex-col items-center text-center pb-3">
-                                        <h3 class="text-xl font-bold text-[#233F4C]">{item.name}</h3>
-                                        <p class="text-sm text-gray-600 mb-2">{item.description}</p>
+                                  
+                                        <h3 class="text-xl font-bold text-[#233F4C]">{item.name}</h3> 
+                                        <p class="text-sm text-gray-600 mb-2 px-4">{item.description}</p>
+                                        
+                                        {/* CORRECCIÓN: Aplicar formato de dos decimales (toFixed(2)) */}
                                         <p class="text-lg font-semibold text-[#265738]">${item.price.toFixed(2)}</p>
+     
                                     </div>
                                     
                                 </article>
+ 
                             ))
                         }
                     </div>
