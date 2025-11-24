@@ -1,54 +1,95 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Footer from "../components/Footer.astro"
+import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 ---
+
 <Layout>
-<Header />
+  <Header />
 
-<main class="grow">
-  <!-- Pre-main -->
-  <section aria-labelledby="hero-title">
-    <div class="bg-[#785034]">
-      <div class="mx-auto max-w-screen px-4 py-4 flex items-center justify-center-safe gap-10 md:flex-row">
-        <h1 id="hero-title" class="text-base font-bold text-white text-center">
-          It's a great day for a coffee!
-        </h1>
-        <a href="/menu" class="inline-flex items-center rounded-full border-2 border-white/80 px-3 py-1.5 text-xs font-semibold hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white text-white text-center">Start an order</a>
+  <main id="main-content" class="grow">
+    <!-- Pre-main -->
+    <section aria-labelledby="hero-title">
+      <div class="bg-[#785034]">
+        <div
+          class="mx-auto max-w-screen px-4 py-4 flex items-center justify-center-safe gap-10 md:flex-row"
+        >
+          <h1
+            id="hero-title"
+            class="text-base font-bold text-white text-center"
+          >
+            Artisan Coffee & Daily Delights
+          </h1>
+          <a
+            href="/menu"
+            class="inline-flex items-center rounded-full border-2 border-white/80 px-3 py-1.5 text-xs font-semibold hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white text-white text-center transition-colors"
+            >Start an order</a
+          >
+        </div>
       </div>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2">
-      <!-- Image -->
-      <div class="w-full">
-        <img src="/premain-image.svg" alt="Fresh coffee drinks" class="w-full h-full object-cover" />
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <!-- Image -->
+        <div class="w-full">
+          <img
+            src="/premain-image.svg"
+            alt="Barista pouring fresh artisan coffee"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- Text Content -->
+        <div
+          class="bg-[#265738] flex flex-col items-center justify-center px-8 py-12 md:px-16"
+        >
+          <h2
+            class="text-2xl md:text-3xl font-bold mb-4 text-center text-white"
+          >
+            Awaken Your Senses
+          </h2>
+          <p
+            class="text-base md:text-lg font-light mb-6 text-center text-white leading-relaxed"
+          >
+            Immerse yourself in the rich, complex flavors of our ethically
+            sourced, masterfully roasted beans. Every cup is a celebration of
+            craft and community.
+          </p>
+        </div>
       </div>
+    </section>
+    <!-- Main Navigation -->
+    <nav
+      aria-label="Main navigation"
+      class="flex flex-col gap-6 items-center my-12"
+    >
+      <ul class="flex flex-col gap-6 w-full items-center">
+        <li>
+          <a
+            href="/menu"
+            class="w-full min-w-64 bg-[#233F4C] hover:bg-[#1a2f39] text-white font-bold py-4 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg"
+          >
+            <span>Our Menu</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/location"
+            class="w-full min-w-64 bg-[#233F4C] hover:bg-[#1a2f39] text-white font-bold py-4 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg"
+          >
+            <span>Location</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/about"
+            class="w-full min-w-64 bg-[#233F4C] hover:bg-[#1a2f39] text-white font-bold py-4 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg"
+          >
+            <span>About Us</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </main>
 
-      <!-- Text Content -->
-      <div class="bg-[#265738] flex flex-col items-center justify-center px-8 py-12 md:px-16">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center text-white">
-          Elevate your routine with fresh coffee!
-        </h2>
-        <p class="text-base md:text-lg font-light mb-6 text-center text-white">
-          Experience coffee as it was meant to be.
-        </p>
-      </div>
-    </div>
-  </section>
-  <!-- Main -->
-   <section class="flex flex-col gap-6 items-center my-12">
-    <a href="/menu" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
-		<span>Our Menu</span>
-    </a>
-    <a href="/location" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
-		<span>Location</span>
-    </a>
-    <a href="/about" class="w-full max-w-64 bg-[#233F4C] hover:bg-gray-700 text-white font-bold py-4 px-2 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg">
-		<span>About us</span>
-    </a>
-   </section>
-</main>
-
-<Footer />
-
+  <Footer />
 </Layout>

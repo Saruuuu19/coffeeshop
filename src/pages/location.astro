@@ -4,20 +4,23 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 ---
 
-<Layout>
-  <Header /> 
-    <main class="flex flex-col gap-5 grow">
-        <header class="flex justify-center items-center h-16 bg-[#785034] shadow-md mb-5 font-bold text-white text-xl"> 
-            <h1>Our Location</h1> 
-        </header>
-      <section class="flex items-center justify-center mt-5 mb-5">
-        <iframe class="h-[75vh] w-[calc(90%-2rem)] shadow-md"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15665.577650183217!2d-74.83624730570772!3d11.009005695880022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42da393453c5d%3A0x7aad0b2ca4683ed6!2sStarbucks%20Viva%20Barranquilla!5e0!3m2!1ses-419!2sco!4v1762715326162!5m2!1ses-419!2sco"
-          allowfullscreen="true"
-          loading="lazy"
-        ></iframe>
-      </section>
-    </main>
+<Layout title="Our Location - Coffee Shop">
+  <Header />
+  <main class="flex flex-col gap-5 grow">
+    <header
+      class="flex justify-center items-center h-16 bg-[#785034] shadow-md mb-5 font-bold text-white text-xl"
+    >
+      <h1>Our Location</h1>
+    </header>
+    <section class="flex items-center justify-center mt-5 mb-5">
+      <iframe
+        class="h-[75vh] w-[calc(90%-2rem)] shadow-md"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15665.577650183217!2d-74.83624730570772!3d11.009005695880022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42da393453c5d%3A0x7aad0b2ca4683ed6!2sStarbucks%20Viva%20Barranquilla!5e0!3m2!1ses-419!2sco!4v1762715326162!5m2!1ses-419!2sco"
+        title="Google Maps location of our coffee shop"
+        allowfullscreen="true"
+        loading="lazy"></iframe>
+    </section>
+  </main>
 
-<Footer/>
+  <Footer />
 </Layout>

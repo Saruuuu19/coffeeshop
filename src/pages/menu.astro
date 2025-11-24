@@ -2,20 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import client from "../lib/contentful.js"; // [cite: 35]
+import client from "../lib/contentful.js";
 
-// FETCH DE DATOS DESDE CONTENTFUL EN TIEMPO DE COMPILACIÓN [cite: 36]
+// FETCH DE DATOS DESDE CONTENTFUL EN TIEMPO DE COMPILACIÓN
 const response = await client.getEntries({
-    // Usa el API Identifier de tu modelo de contenido (que es 'menuItem') [cite: 36]
+    // Usa el API Identifier de tu modelo de contenido (que es 'menuItem') 
     content_type: 'menuItem', 
-    // Opcional: Ordena los resultados por categoría [cite: 36]
+    // Opcional: Ordena los resultados por categoría
     order: ['fields.category'], 
 });
 
 
-// 3. Mapea la respuesta de Contentful a un array limpio. [cite: 37]
-// Los datos reales del producto están anidados dentro de 'fields'. [cite: 38]
-// El nombre que pusiste en Contentful era 'name', 'price', etc. [cite: 39]
+// 3. Mapea la respuesta de Contentful a un array limpio.
+// Los datos reales del producto están anidados dentro de 'fields'.
+// El nombre que pusiste en Contentful era 'name', 'price', etc.
 const menuItems = response.items.map(item => ({
     ...item.fields,
     // CORRECCIÓN CLAVE: Obtener la URL del asset de la imagen (está anidada en la respuesta)
@@ -24,7 +24,7 @@ const menuItems = response.items.map(item => ({
     imageUrl: item.fields.productImage?.fields?.file?.url ? `https:${item.fields.productImage?.fields?.file?.url}` : null,
 }));
 
-// Agrupamos los items por categoría [cite: 40]
+// Agrupamos los items por categoría 
 // @ts-ignore
 const categories = [...new Set(menuItems.map(item => item.category))]
 ---
@@ -37,7 +37,7 @@ const categories = [...new Set(menuItems.map(item => item.category))]
         </header>
 
         {
-            //Iterar sobre las categorías [cite: 41]
+            //Iterar sobre las categorías
             categories.map(category => (
                 <section class="mb-2">
                     <h2 class="text-3xl font-semibold ml-2">
