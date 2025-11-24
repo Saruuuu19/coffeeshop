@@ -1,9 +1,21 @@
 ---
-import MobileMenu from "./MobileMenu.jsx"
+import MobileMenu from "./MobileMenu.jsx";
 ---
 
-<header class="bg-white h-12 flex items-center justify-end shadow-xl"> 
-    <nav class="max-w-screen max-h-12 mx-3"> 
-        <MobileMenu client:load /> 
+<header
+    class="bg-white h-16 flex items-center justify-between px-6 shadow-md sticky top-0 z-40"
+>
+    <a href="/" class="flex items-center gap-2 group">
+        <span
+            class="material-icons text-[#B45F3D] text-3xl group-hover:rotate-12 transition-transform duration-300"
+            >coffee</span
+        >
+        <span
+            class="font-bold text-xl text-[#233F4C] tracking-tight group-hover:text-[#B45F3D] transition-colors"
+            >Coffee Shop</span
+        >
+    </a>
+    <nav>
+        <MobileMenu client:load />
     </nav>
 </header>

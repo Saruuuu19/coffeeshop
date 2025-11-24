@@ -6,80 +6,115 @@ import client from "../lib/contentful.js";
 
 // FETCH DE DATOS DESDE CONTENTFUL EN TIEMPO DE COMPILACIÓN
 const response = await client.getEntries({
-    // Usa el API Identifier de tu modelo de contenido (que es 'menuItem') 
-    content_type: 'menuItem', 
+    // Usa el API Identifier de tu modelo de contenido (que es 'menuItem')
+    content_type: "menuItem",
     // Opcional: Ordena los resultados por categoría
-    order: ['fields.category'], 
+    order: ["fields.category"],
 });
-
 
 // 3. Mapea la respuesta de Contentful a un array limpio.
 // Los datos reales del producto están anidados dentro de 'fields'.
 // El nombre que pusiste en Contentful era 'name', 'price', etc.
-const menuItems = response.items.map(item => ({
+const menuItems = response.items.map((item) => ({
     ...item.fields,
     // CORRECCIÓN CLAVE: Obtener la URL del asset de la imagen (está anidada en la respuesta)
     // Se asume que el campo Media se llama 'productImage' y que existe en el objeto 'fields'.
     // @ts-ignore
     imageUrl: item.fields.productImage?.fields?.file?.url ? `https:${item.fields.productImage?.fields?.file?.url}` : null,
+    // Mock badge logic for UI demonstration
+    badge: Math.random() > 0.7 ? Math.random() > 0.5 ? "New" : "Best Seller" : null,
 }));
 
-// Agrupamos los items por categoría 
+// Agrupamos los items por categoría
 // @ts-ignore
-const categories = [...new Set(menuItems.map(item => item.category))]
+const categories = [...new Set(menuItems.map((item) => item.category))];
 ---
 
-<Layout title="Our Menu">
+<Layout title="Our Menu - Artisan Coffee">
     <Header />
-    <main class="grow">
-        <header class="flex justify-center items-center w-screen h-16 bg-[#785034] shadow-md mb-5 font-bold text-white text-xl"> 
-            <h1>Our Menu</h1> 
+    <main class="grow bg-[#F5F1E8]">
+        <header
+            class="flex justify-center items-center w-full h-24 bg-[#785034] shadow-md mb-8 font-bold text-white text-3xl tracking-wide"
+        >
+            <h1>Our Menu</h1>
         </header>
 
-        {
-            //Iterar sobre las categorías
-            categories.map(category => (
-                <section class="mb-2">
-                    <h2 class="text-3xl font-semibold ml-2">
-                        {category}
-                    </h2>
-               
-                    {/* Iterar sobre los ítems dentro de la categoría */}
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {menuItems
-                  
-                        .filter((item: any) => item.category === category)
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+            {
+                //Iterar sobre las categorías
+                categories.map((category) => (
+                    <section class="mb-12">
+                        <div class="flex items-center mb-6">
+                            <h2 class="text-3xl font-bold text-[#233F4C] border-l-4 border-[#B45F3D] pl-4">
+                                {category}
+                            </h2>
+                            <div class="h-px bg-gray-300 grow ml-6" />
+                        </div>
 
-                            .map((item: any) => (
-                                <article class="bg-white shadow-lg rounded-2xl transition hover:shadow-xl m-3">
-                  
-                                    {/* CORRECCIÓN: Usar la URL optimizada y verificada */}
-                                    {item.imageUrl && (
-                                        <img 
-                                            src={`${item.imageUrl}?w=400&h=300&fit=fill`} 
-                                            alt={item.name} 
-                                            class="w-full h-40 object-cover rounded-t-2xl mb-3" 
-                                        />
-                                    )}
-                                    
-                                    <div class="flex flex-col items-center text-center pb-3">
-                                  
-                                        <h3 class="text-xl font-bold text-[#233F4C]">{item.name}</h3> 
-                                        <p class="text-sm text-gray-600 mb-2 px-4">{item.description}</p>
-                                        
-                                        {/* CORRECCIÓN: Aplicar formato de dos decimales (toFixed(2)) */}
-                                        <p class="text-lg font-semibold text-[#265738]">${item.price.toFixed(2)}</p>
-     
-                                    </div>
-                                    
-                                </article>
- 
-                            ))
-                        }
-                    </div>
-                </section>
-            ))
-        }
+                        {/* Iterar sobre los ítems dentro de la categoría */}
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {menuItems
+                                // @ts-ignore
+                                .filter(
+                                    (item: any) => item.category === category,
+                                )
+                                .map((item: any) => (
+                                    <article class="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden border border-gray-100">
+                                        {/* Badge for Best Seller / New */}
+                                        {item.badge && (
+                                            <div
+                                                class={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-xs font-bold text-white shadow-md uppercase tracking-wider ${item.badge === "New" ? "bg-[#265738]" : "bg-[#B45F3D]"}`}
+                                            >
+                                                {item.badge}
+                                            </div>
+                                        )}
+
+                                        <div class="relative overflow-hidden h-64">
+                                            {item.imageUrl ? (
+                                                <img
+                                                    src={`${item.imageUrl}?w=600&h=500&fit=fill`}
+                                                    alt={item.name}
+                                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                />
+                                            ) : (
+                                                <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">
+                                                    <span class="material-icons text-5xl">
+                                                        coffee
+                                                    </span>
+                                                </div>
+                                            )}
+                                            {/* Overlay gradient on hover */}
+                                            <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        </div>
+
+                                        <div class="p-6 flex flex-col grow">
+                                            <div class="flex justify-between items-start mb-3">
+                                                <h3 class="text-xl font-bold text-[#233F4C] leading-tight group-hover:text-[#B45F3D] transition-colors">
+                                                    {item.name}
+                                                </h3>
+                                                <span class="text-xl font-bold text-[#265738]">
+                                                    ${item.price.toFixed(2)}
+                                                </span>
+                                            </div>
+
+                                            <p class="text-sm text-gray-600 mb-6 grow leading-relaxed line-clamp-3">
+                                                {item.description}
+                                            </p>
+
+                                            <button class="w-full bg-[#233F4C] hover:bg-[#1a2f39] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-[#B45F3D] group-hover:shadow-lg transform active:scale-95">
+                                                <span>Add to Order</span>
+                                                <span class="material-icons text-sm">
+                                                    add_shopping_cart
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </article>
+                                ))}
+                        </div>
+                    </section>
+                ))
+            }
+        </div>
     </main>
     <Footer />
 </Layout>

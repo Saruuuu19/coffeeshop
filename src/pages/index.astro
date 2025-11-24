@@ -7,48 +7,54 @@ import Header from "../components/Header.astro";
 <Layout>
   <Header />
 
-  <main id="main-content" class="grow">
+  <main id="main-content" class="grow bg-[#F5F1E8]">
     <!-- Pre-main -->
     <section aria-labelledby="hero-title">
       <div class="bg-[#785034]">
         <div
-          class="mx-auto max-w-screen px-4 py-4 flex items-center justify-center-safe gap-10 md:flex-row"
+          class="mx-auto max-w-screen px-4 py-6 flex items-center justify-center-safe gap-8 md:flex-row"
         >
           <h1
             id="hero-title"
-            class="text-base font-bold text-white text-center"
+            class="text-lg md:text-xl font-bold text-white text-center tracking-wide"
           >
             Artisan Coffee & Daily Delights
           </h1>
           <a
             href="/menu"
-            class="inline-flex items-center rounded-full border-2 border-white/80 px-3 py-1.5 text-xs font-semibold hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white text-white text-center transition-colors"
-            >Start an order</a
+            class="inline-flex items-center rounded-full bg-white text-[#785034] px-5 py-2 text-sm font-bold hover:bg-[#F5F1E8] focus:outline-none focus-visible:ring-2 focus-visible:ring-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           >
+            Start an order
+            <span class="material-icons text-base ml-1">arrow_forward</span>
+          </a>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2">
         <!-- Image -->
-        <div class="w-full">
+        <div class="w-full h-64 md:h-auto relative overflow-hidden group">
           <img
             src="/premain-image.svg"
             alt="Barista pouring fresh artisan coffee"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
+          <div
+            class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500"
+          >
+          </div>
         </div>
 
         <!-- Text Content -->
         <div
-          class="bg-[#265738] flex flex-col items-center justify-center px-8 py-12 md:px-16"
+          class="bg-[#265738] flex flex-col items-center justify-center px-8 py-16 md:px-16 text-center"
         >
           <h2
-            class="text-2xl md:text-3xl font-bold mb-4 text-center text-white"
+            class="text-3xl md:text-4xl font-bold mb-6 text-white font-montserrat"
           >
             Awaken Your Senses
           </h2>
           <p
-            class="text-base md:text-lg font-light mb-6 text-center text-white leading-relaxed"
+            class="text-lg md:text-xl font-light mb-8 text-white/90 leading-relaxed max-w-md"
           >
             Immerse yourself in the rich, complex flavors of our ethically
             sourced, masterfully roasted beans. Every cup is a celebration of
@@ -58,33 +64,54 @@ import Header from "../components/Header.astro";
       </div>
     </section>
     <!-- Main Navigation -->
-    <nav
-      aria-label="Main navigation"
-      class="flex flex-col gap-6 items-center my-12"
-    >
-      <ul class="flex flex-col gap-6 w-full items-center">
+    <nav aria-label="Main navigation" class="max-w-4xl mx-auto px-4 my-16">
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
         <li>
           <a
             href="/menu"
-            class="w-full min-w-64 bg-[#233F4C] hover:bg-[#1a2f39] text-white font-bold py-4 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg"
+            class="group flex flex-col items-center justify-center bg-white hover:bg-[#233F4C] text-[#233F4C] hover:text-white py-8 px-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
           >
-            <span>Our Menu</span>
+            <span
+              class="material-icons text-5xl mb-4 text-[#B45F3D] group-hover:text-white transition-colors"
+              >restaurant_menu</span
+            >
+            <span class="text-xl font-bold">Our Menu</span>
+            <span
+              class="text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-light"
+              >Explore flavors</span
+            >
           </a>
         </li>
         <li>
           <a
             href="/location"
-            class="w-full min-w-64 bg-[#233F4C] hover:bg-[#1a2f39] text-white font-bold py-4 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg"
+            class="group flex flex-col items-center justify-center bg-white hover:bg-[#233F4C] text-[#233F4C] hover:text-white py-8 px-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
           >
-            <span>Location</span>
+            <span
+              class="material-icons text-5xl mb-4 text-[#B45F3D] group-hover:text-white transition-colors"
+              >place</span
+            >
+            <span class="text-xl font-bold">Location</span>
+            <span
+              class="text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-light"
+              >Find us</span
+            >
           </a>
         </li>
         <li>
           <a
             href="/about"
-            class="w-full min-w-64 bg-[#233F4C] hover:bg-[#1a2f39] text-white font-bold py-4 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center text-lg"
+            class="group flex flex-col items-center justify-center bg-white hover:bg-[#233F4C] text-[#233F4C] hover:text-white py-8 px-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
           >
-            <span>About Us</span>
+            <span
+              class="material-icons text-5xl mb-4 text-[#B45F3D] group-hover:text-white transition-colors"
+              >groups</span
+            >
+            <span class="text-xl font-bold">About Us</span>
+            <span
+              class="text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-light"
+              >Our story</span
+            >
           </a>
         </li>
       </ul>
