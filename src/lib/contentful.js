@@ -1,5 +1,4 @@
 import * as contentful from 'contentful';
-
 // Astro usa import.meta.env para acceder a las variables del .env
 const client = contentful.createClient({
   // Las claves son inyectadas aquí desde el archivo .env

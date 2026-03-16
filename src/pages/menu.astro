@@ -1,38 +1,69 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import client from "../lib/contentful.js";
+import type { EntryFieldTypes, Asset } from "contentful";
 
-// FETCH DE DATOS DESDE CONTENTFUL EN TIEMPO DE COMPILACIÓN
-const response = await client.getEntries({
-    // Usa el API Identifier de tu modelo de contenido (que es 'menuItem')
+/** Skeleton tipado del content type 'menuItem' en Contentful */
+interface MenuItemSkeleton {
+    contentTypeId: "menuItem";
+    fields: {
+        name: EntryFieldTypes.Symbol;
+        description: EntryFieldTypes.Text;
+        price: EntryFieldTypes.Number;
+        category: EntryFieldTypes.Symbol;
+        productImage: EntryFieldTypes.AssetLink;
+    };
+}
+
+/** Forma final de cada item tras mapear la respuesta */
+interface MenuItem {
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    imageUrl: string | null;
+    badge: string | null;
+}
+
+// Fetch tipado desde Contentful (build-time)
+const response = await client.getEntries<MenuItemSkeleton>({
     content_type: "menuItem",
-    // Opcional: Ordena los resultados por categoría
     order: ["fields.category"],
 });
 
-// 3. Mapea la respuesta de Contentful a un array limpio.
-// Los datos reales del producto están anidados dentro de 'fields'.
-// El nombre que pusiste en Contentful era 'name', 'price', etc.
-const menuItems = response.items.map((item) => ({
-    ...item.fields,
-    // CORRECCIÓN CLAVE: Obtener la URL del asset de la imagen (está anidada en la respuesta)
-    // Se asume que el campo Media se llama 'productImage' y que existe en el objeto 'fields'.
-    // @ts-ignore
-    imageUrl: item.fields.productImage?.fields?.file?.url ? `https:${item.fields.productImage?.fields?.file?.url}` : null,
-    // Mock badge logic for UI demonstration
-    badge: Math.random() > 0.7 ? Math.random() > 0.5 ? "New" : "Best Seller" : null,
-}));
+// Mapear respuesta a un array limpio con la URL de imagen resuelta
+const menuItems: MenuItem[] = response.items.map((item) => {
+    const image = item.fields.productImage as Asset | undefined;
+    const rawUrl = image?.fields?.file?.url;
 
-// Agrupamos los items por categoría
-// @ts-ignore
-const categories = [...new Set(menuItems.map((item) => item.category))];
+    return {
+        name: item.fields.name as string,
+        description: item.fields.description as string,
+        price: item.fields.price as number,
+        category: item.fields.category as string,
+        imageUrl: rawUrl ? `https:${rawUrl}` : null,
+        badge:
+            Math.random() > 0.7
+                ? Math.random() > 0.5
+                    ? "New"
+                    : "Best Seller"
+                : null,
+    };
+});
+
+// Categorías únicas para agrupar los items
+const categories: string[] = [
+    ...new Set(menuItems.map((item) => item.category)),
+];
 ---
 
-<Layout title="Our Menu - Artisan Coffee">
+<Layout
+    title="Our Menu - Artisan Coffee"
+    description="Explore our full menu of artisan coffees, teas, pastries, and seasonal specials. Ethically sourced, freshly roasted."
+>
     <Header />
-    <main class="grow bg-[#F5F1E8]">
+    <main id="main-content" class="grow bg-[#F5F1E8]">
         <header
             class="flex justify-center items-center w-full h-24 bg-[#785034] shadow-md mb-8 font-bold text-white text-3xl tracking-wide"
         >
@@ -41,9 +72,8 @@ const categories = [...new Set(menuItems.map((item) => item.category))];
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
             {
-                //Iterar sobre las categorías
                 categories.map((category) => (
-                    <section class="mb-12">
+                    <section class="mb-12" aria-label={`${category} category`}>
                         <div class="flex items-center mb-6">
                             <h2 class="text-3xl font-bold text-[#233F4C] border-l-4 border-[#B45F3D] pl-4">
                                 {category}
@@ -51,29 +81,34 @@ const categories = [...new Set(menuItems.map((item) => item.category))];
                             <div class="h-px bg-gray-300 grow ml-6" />
                         </div>
 
-                        {/* Iterar sobre los ítems dentro de la categoría */}
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {menuItems
-                                // @ts-ignore
-                                .filter(
-                                    (item: any) => item.category === category,
-                                )
-                                .map((item: any) => (
+                                .filter((item) => item.category === category)
+                                .map((item) => (
                                     <article class="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden border border-gray-100">
-                                        {/* Badge for Best Seller / New */}
+                                        {/* Badge */}
                                         {item.badge && (
                                             <div
-                                                class={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-xs font-bold text-white shadow-md uppercase tracking-wider ${item.badge === "New" ? "bg-[#265738]" : "bg-[#B45F3D]"}`}
+                                                class={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-xs font-bold text-white shadow-md uppercase tracking-wider ${
+                                                    item.badge === "New"
+                                                        ? "bg-[#265738]"
+                                                        : "bg-[#B45F3D]"
+                                                }`}
                                             >
                                                 {item.badge}
                                             </div>
                                         )}
 
+                                        {/* Product image */}
                                         <div class="relative overflow-hidden h-64">
                                             {item.imageUrl ? (
                                                 <img
                                                     src={`${item.imageUrl}?w=600&h=500&fit=fill`}
                                                     alt={item.name}
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    width="600"
+                                                    height="500"
                                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
                                             ) : (
@@ -83,7 +118,7 @@ const categories = [...new Set(menuItems.map((item) => item.category))];
                                                     </span>
                                                 </div>
                                             )}
-                                            {/* Overlay gradient on hover */}
+                                            {/* Hover overlay */}
                                             <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         </div>
 
@@ -116,5 +151,4 @@ const categories = [...new Set(menuItems.map((item) => item.category))];
             }
         </div>
     </main>
-    <Footer />
 </Layout>

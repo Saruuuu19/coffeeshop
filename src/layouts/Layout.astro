@@ -1,4 +1,8 @@
-<!doctype html>
+---
+import Footer from "../components/Footer.astro";
+---
+
+<!Doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -42,7 +46,8 @@
 		>
 			Skip to content
 		</a>
-		<slot />
+			<slot />
+		<Footer />
 	</body>
 </html>
 
@@ -57,7 +62,6 @@
 	body {
 		margin: 0;
 		width: 100%;
-		min-height: 100%;
 		overflow-x: hidden;
 		scroll-behavior: smooth;
 	}
