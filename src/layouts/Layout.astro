@@ -2,67 +2,65 @@
 import Footer from "../components/Footer.astro";
 ---
 
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<meta
-			name="description"
-			content={Astro.props.description ||
-				"Experience the finest artisan coffee, roasted to perfection and brewed with passion. Join us for a sensory journey."}
-		/>
-		<meta
-			property="og:title"
-			content={Astro.props.title ||
-				"Coffee Shop - Artisan Coffee & Pastries"}
-		/>
-		<meta
-			property="og:description"
-			content={Astro.props.description ||
-				"Experience the finest artisan coffee, roasted to perfection and brewed with passion. Join us for a sensory journey."}
-		/>
-		<meta property="og:type" content="website" />
-		<meta property="og:image" content="/premain-image.svg" />
-		<title>
-			{Astro.props.title || "Coffee Shop - Artisan Coffee & Pastries"}
-		</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content={Astro.props.description ||
+        "Experience the finest artisan coffee, roasted to perfection and brewed with passion. Join us for a sensory journey."}
+    />
+    <meta
+      property="og:title"
+      content={Astro.props.title || "Coffee Shop - Artisan Coffee & Pastries"}
+    />
+    <meta
+      property="og:description"
+      content={Astro.props.description ||
+        "Experience the finest artisan coffee, roasted to perfection and brewed with passion. Join us for a sensory journey."}
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/premain-image.svg" />
+    <title>
+      {Astro.props.title || "Coffee Shop - Artisan Coffee & Pastries"}
+    </title>
 
-		<link
-			href="https://fonts.googleapis.com/icon?family=Material+Icons"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-	<body class="min-h-screen flex flex-col">
-		<a
-			href="#main-content"
-			class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#B45F3D] text-white px-4 py-2 rounded-md z-50"
-		>
-			Skip to content
-		</a>
-			<slot />
-		<Footer />
-	</body>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#B45F3D] text-white px-4 py-2 rounded-md z-50"
+    >
+      Skip to content
+    </a>
+    <slot />
+    <Footer />
+    <style is:global>
+      @import "tailwindcss";
+      body {
+        font-family: "Montserrat", "Roboto", Arial, sans-serif;
+        background-color: #f5f1e8;
+        color: #2c2c2c;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+    </style>
+  </body>
 </html>
-
-<style is:global>
-	@import "tailwindcss";
-	body {
-		font-family: "Montserrat", "Roboto", Arial, sans-serif;
-		background-color: #f5f1e8;
-		color: #2c2c2c;
-	}
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		overflow-x: hidden;
-		scroll-behavior: smooth;
-	}
-</style>
