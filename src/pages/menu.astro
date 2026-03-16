@@ -13,7 +13,7 @@ interface MenuItemSkeleton {
     price: EntryFieldTypes.Number;
     category: EntryFieldTypes.Symbol;
     productImage: EntryFieldTypes.AssetLink;
-    badge: EntryFieldTypes.Symbol;
+    badge: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
   };
 }
 
@@ -24,7 +24,7 @@ interface MenuItem {
   price: number;
   category: string;
   imageUrl: string | null;
-  badge: string | null;
+  badge: string[];
 }
 
 // Fetch tipado desde Contentful (build-time)
@@ -44,7 +44,7 @@ const menuItems: MenuItem[] = response.items.map((item) => {
     price: item.fields.price as number,
     category: item.fields.category as string,
     imageUrl: rawUrl ? `https:${rawUrl}` : null,
-    badge: item.fields.badge || null,
+    badge: (item.fields.badge as string[]) || [],
   };
 });
 
@@ -82,18 +82,24 @@ const categories: string[] = [
                 .filter((item) => item.category === category)
                 .map((item) => (
                   <article class="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden border border-gray-100">
-                    {/* Badge */}
-                    {item.badge && (
-                      <div
-                        class={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-xs font-bold text-white shadow-md uppercase tracking-wider ${
-                          item.badge === "New"
-                            ? "bg-[#265738]"
-                            : item.badge === "Best Seller"
-                            ? "bg-[#B45F3D]"
-                            : "bg-[#7B2D8B]"
-                        }`}
-                      >
-                        {item.badge}
+                    {/* Badge container */}
+                    {item.badge.length > 0 && (
+                      <div class="absolute top-4 right-4 z-10 flex flex-col gap-1">
+                        {item.badge.map((b) => (
+                          <div
+                            class={`px-3 py-1 rounded-full text-xs font-bold text-white text-center shadow-md uppercase tracking-wider ${
+                              b === "New"
+                                ? "bg-[#265738]"
+                                : b === "Best Seller"
+                                ? "bg-[#B45F3D]"
+                                : b === "Discount"
+                                ? "bg-[#891313]"
+                                : "bg-[#7B2D8B]"
+                            }`}
+                          >
+                            {b}
+                          </div>
+                        ))}
                       </div>
                     )}
 
