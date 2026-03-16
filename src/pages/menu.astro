@@ -1,39 +1,55 @@
 ---
+/**
+ * menu.astro — Página del menú.
+ * Obtiene los productos desde Contentful en tiempo de build
+ * y los renderiza agrupados por categoría.
+ */
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import client from "../lib/contentful.js";
+// Tipos del SDK de Contentful para definir la forma de los campos
 import type { EntryFieldTypes, Asset } from "contentful";
 
-/** Skeleton tipado del content type 'menuItem' en Contentful */
+/**
+ * Skeleton tipado para el content type 'menuItem' de Contentful.
+ * Debe coincidir con los campos definidos en el panel de Contentful.
+ * Se pasa como genérico a getEntries<T>() para tipar la respuesta.
+ */
 interface MenuItemSkeleton {
   contentTypeId: "menuItem";
   fields: {
-    name: EntryFieldTypes.Symbol;
-    description: EntryFieldTypes.Text;
-    price: EntryFieldTypes.Number;
-    category: EntryFieldTypes.Symbol;
-    productImage: EntryFieldTypes.AssetLink;
-    badge: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+    name: EntryFieldTypes.Symbol;        // Texto corto (título del producto)
+    description: EntryFieldTypes.Text;   // Texto largo (descripción)
+    price: EntryFieldTypes.Number;       // Precio numérico
+    category: EntryFieldTypes.Symbol;    // Categoría para agrupar (ej: "Coffee", "Pastry")
+    productImage: EntryFieldTypes.AssetLink; // Referencia a un asset (imagen)
+    badge: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; // Etiquetas opcionales ("New", "Best Seller", etc.)
   };
 }
 
-/** Forma final de cada item tras mapear la respuesta */
+/**
+ * Interfaz local con la forma simplificada de cada producto.
+ * Se usa para no trabajar directamente con la estructura anidada de Contentful.
+ */
 interface MenuItem {
   name: string;
   description: string;
   price: number;
   category: string;
-  imageUrl: string | null;
-  badge: string[];
+  imageUrl: string | null; // null si el producto no tiene imagen subida
+  badge: string[];         // Array de etiquetas (puede estar vacío)
 }
 
-// Fetch tipado desde Contentful (build-time)
+// Petición a la API de Contentful (se ejecuta en build-time, no en el navegador).
+// El genérico <MenuItemSkeleton> le dice a TypeScript qué campos esperar.
 const response = await client.getEntries<MenuItemSkeleton>({
-  content_type: "menuItem",
-  order: ["fields.category"],
+  content_type: "menuItem",      // API Identifier del modelo en Contentful
+  order: ["fields.category"],    // Ordenar alfabéticamente por categoría
 });
 
-// Mapear respuesta a un array limpio con la URL de imagen resuelta
+// Transformar la respuesta de Contentful a nuestro formato limpio (MenuItem[]).
+// La imagen en Contentful viene anidada: productImage -> fields -> file -> url.
+// Las URLs de Contentful no incluyen el protocolo, por eso se añade "https:".
 const menuItems: MenuItem[] = response.items.map((item) => {
   const image = item.fields.productImage as Asset | undefined;
   const rawUrl = image?.fields?.file?.url;
@@ -48,17 +64,20 @@ const menuItems: MenuItem[] = response.items.map((item) => {
   };
 });
 
-// Categorías únicas para agrupar los items
+// Extraer categorías únicas usando Set (elimina duplicados)
+// Se usa para iterar y crear una <section> por cada categoría
 const categories: string[] = [
   ...new Set(menuItems.map((item) => item.category)),
 ];
 ---
 
+<!-- Layout recibe title y description para los meta tags de SEO -->
 <Layout
   title="Our Menu - Artisan Coffee"
   description="Explore our full menu of artisan coffees, teas, pastries, and seasonal specials. Ethically sourced, freshly roasted."
 >
   <Header />
+  <!-- id="main-content" es el destino del enlace "Skip to content" del Layout -->
   <main id="main-content" class="grow bg-[#F5F1E8]">
     <header
       class="flex justify-center items-center w-full h-24 bg-[#785034] shadow-md mb-8 font-bold text-white text-3xl tracking-wide"
@@ -66,10 +85,13 @@ const categories: string[] = [
       <h1>Our Menu</h1>
     </header>
 
+    <!-- Contenedor principal del grid de productos -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
       {
+        /* Se crea una <section> por cada categoría con sus productos filtrados */
         categories.map((category) => (
           <section class="mb-12" aria-label={`${category} category`}>
+            {/* Encabezado de categoría con línea decorativa */}
             <div class="flex items-center mb-6">
               <h2 class="text-3xl font-bold text-[#233F4C] border-l-4 border-[#B45F3D] pl-4">
                 {category}
@@ -77,12 +99,14 @@ const categories: string[] = [
               <div class="h-px bg-gray-300 grow ml-6" />
             </div>
 
+            {/* Grid responsive: 1 col (móvil) → 2 col (tablet) → 3 col (desktop) */}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {menuItems
                 .filter((item) => item.category === category)
                 .map((item) => (
+                  /* Tarjeta de producto — "group" activa efectos hover en hijos con "group-hover:" */
                   <article class="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden border border-gray-100">
-                    {/* Badge container */}
+                    {/* Badges: se apilan verticalmente si hay más de uno */}
                     {item.badge.length > 0 && (
                       <div class="absolute top-4 right-4 z-10 flex flex-col gap-1">
                         {item.badge.map((b) => (
@@ -103,7 +127,7 @@ const categories: string[] = [
                       </div>
                     )}
 
-                    {/* Product image */}
+                    {/* Imagen del producto con fallback si no tiene imagen */}
                     <div class="relative overflow-hidden h-64">
                       {item.imageUrl ? (
                         <img
@@ -124,6 +148,7 @@ const categories: string[] = [
                       <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
 
+                    {/* Contenido de texto: nombre, precio, descripción y botón */}
                     <div class="p-6 flex flex-col grow">
                       <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold text-[#233F4C] leading-tight group-hover:text-[#B45F3D] transition-colors">

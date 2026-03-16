@@ -1,4 +1,10 @@
 ---
+/**
+ * about.astro — Página "About Us".
+ * Ruta: /about
+ * Presenta la misión de la cafetería, valores fundamentales,
+ * un banner con cita decorativa y un enlace al menú.
+ */
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 ---
@@ -7,6 +13,7 @@ import Header from "../components/Header.astro";
   <Header />
 
   <main class="grow">
+    <!-- Sección introductoria: título principal y subtítulo -->
     <section class="py-10 text-center">
       <div class="max-w-4xl mx-auto px-4">
         <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-[#233F4C]">
@@ -19,6 +26,7 @@ import Header from "../components/Header.astro";
       </div>
     </section>
 
+    <!-- Grid de 2 columnas: Propósito (izq) + Valores (der) -->
     <section class="max-w-6xl mx-auto py-5 px-4 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <div>
@@ -47,6 +55,7 @@ import Header from "../components/Header.astro";
           >
             Our Core Values
           </h2>
+          <!-- Lista de definición semántica (<dl>): cada valor con ícono, término y descripción -->
           <dl class="space-y-6">
             <div class="flex">
               <span class="text-3xl text-[#B45F3D] mr-4">🌱</span>
@@ -85,6 +94,7 @@ import Header from "../components/Header.astro";
       </div>
     </section>
 
+    <!-- Banner decorativo con imagen y cita superpuesta -->
     <section class="relative mt-10">
       <img
         src="/premain-image.svg"
@@ -102,6 +112,7 @@ import Header from "../components/Header.astro";
       </div>
     </section>
 
+    <!-- CTA final: enlace al menú -->
     <section class="text-center my-20">
       <h2 class="text-3xl font-bold mb-4 text-[#233F4C]">
         Taste the Difference Today

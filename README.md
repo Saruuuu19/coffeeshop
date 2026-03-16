@@ -27,7 +27,7 @@ This project was a practical exercise to master high-performance front-end archi
 
 ## 🚀 Get Started
 
-1.  **Clone:** `git clone https://github.com/andresretamoso/coffeeshop.git`
+1.  **Clone:** `git clone https://github.com/Saruuuu19/coffeeshop.git`
 2.  **Install:** `npm install`
 3.  **Run Dev Server:** `npm run dev`
 
@@ -35,4 +35,14 @@ This project was a practical exercise to master high-performance front-end archi
 
 ## 📝 Credits
 
-* **Developer:** [Andrés Retamoso]
+* **Developer:** [Andrés Retamoso](https://github.com/Saruuuu19)
+
+## 🎨 Color Palette
+
+| Color | Hex |
+| :--- | :--- |
+| **Light Coffee** | `#785034` |
+| **Green** | `#233F4C` |
+| **White** | `#F5F1E8` |
+| **Orange** | `#B45F3D` |
+| **Blue** | `#233F4C` |

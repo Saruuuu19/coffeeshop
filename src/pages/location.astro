@@ -1,4 +1,9 @@
 ---
+/**
+ * location.astro — Página de ubicación.
+ * Ruta: /location
+ * Muestra un mapa de Google Maps embebido con la ubicación de la cafetería.
+ */
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 ---
@@ -11,6 +16,7 @@ import Header from "../components/Header.astro";
     >
       <h1>Our Location</h1>
     </header>
+    <!-- Mapa embebido de Google Maps usando iframe con loading="lazy" para rendimiento -->
     <section class="flex items-center justify-center mt-5 mb-5">
       <iframe
         class="h-[75vh] w-[calc(90%-2rem)] shadow-md"

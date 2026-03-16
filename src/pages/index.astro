@@ -1,13 +1,20 @@
 ---
+/**
+ * index.astro — Página principal (Home).
+ * Ruta: / (Astro usa file-based routing: src/pages/index.astro → /)
+ * Contiene el hero banner, sección de bienvenida y
+ * tarjetas de navegación a las principales secciones.
+ */
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 ---
 
+<!-- Sin title ni description explícitos, Layout usa sus valores por defecto -->
 <Layout>
   <Header />
 
   <main id="main-content" class="grow bg-[#F5F1E8]">
-    <!-- Pre-main -->
+    <!-- Hero: banner superior con título y enlace al menú -->
     <section aria-labelledby="hero-title">
       <div class="bg-[#785034]">
         <div
@@ -29,8 +36,9 @@ import Header from "../components/Header.astro";
         </div>
       </div>
 
+      <!-- Grid de 2 columnas: imagen hero + texto de bienvenida -->
       <div class="grid grid-cols-1 md:grid-cols-2">
-        <!-- Image -->
+        <!-- Imagen hero con efecto zoom al hover -->
         <div class="w-full h-64 md:h-auto relative overflow-hidden group">
           <img
             src="/premain-image.svg"
@@ -43,7 +51,7 @@ import Header from "../components/Header.astro";
           </div>
         </div>
 
-        <!-- Text Content -->
+        <!-- Bloque de texto con fondo verde oscuro -->
         <div
           class="bg-[#265738] flex flex-col items-center justify-center px-8 py-16 md:px-16 text-center"
         >
@@ -62,7 +70,7 @@ import Header from "../components/Header.astro";
         </div>
       </div>
     </section>
-    <!-- Main Navigation -->
+    <!-- Tarjetas de navegación: Menú, Ubicación, Acerca de -->
     <nav aria-label="Main navigation" class="max-w-4xl mx-auto px-4 my-16">
       <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
         <li>
