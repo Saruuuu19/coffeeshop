@@ -1,5 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
+import CartDrawer from "../components/CartDrawer.jsx";
 ---
 
 <!DOCTYPE html>
@@ -46,6 +47,7 @@ import Footer from "../components/Footer.astro";
       Skip to content
     </a>
     <slot />
+    <CartDrawer client:load />
     <Footer />
     <style is:global>
       @import "tailwindcss";

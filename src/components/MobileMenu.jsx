@@ -34,7 +34,7 @@ export default function MobileMenu() {
         class={`fixed top-0 right-0 h-screen w-64 bg-white shadow-2xl z-50 transform ${sidebarClasses} transition-transform duration-300 ease-in-out`}
       >
         {/* Header del Sidebar con el botón de cerrar */}
-        <div class="p-4 flex justify-between items-center border-b border-gray-200">
+        <div class="px-4 pt-4 flex justify-between items-center border-b border-gray-200">
           <span class="text-xl font-bold text-[#B45F3D]">Navigation</span>
           <button
             onClick={toggleMenu}
@@ -50,12 +50,12 @@ export default function MobileMenu() {
         </div>
 
         {/* Enlaces del Menú */}
-        <ul class="flex flex-col p-4 space-y-2 ">
-          <li><a href="/" class="block px-3 py-2 text-lg font-medium hover:bg-gray-200 hover:text-[#233F4C] rounded-lg">Home</a></li>
-          <li><a href="/menu" class="block px-3 py-2 text-lg font-medium hover:bg-gray-200 hover:text-[#233F4C] rounded-lg">Our Menu</a></li>
-          <li><a href="/location" class="block px-3 py-2 text-lg font-medium hover:bg-gray-200 hover:text-[#233F4C] rounded-lg">Location</a></li>
-          <li><a href="/about" class="block px-3 py-2 text-lg font-medium hover:bg-gray-200 hover:text-[#233F4C] rounded-lg">About us</a></li>
-          <li class="pt-4"><a href="/menu" class="block text-center px-4 py-2 bg-[#B45F3D] text-white rounded-full font-bold hover:bg-[#B45F3D]/90">Start an order</a></li>
+        <ul class="flex flex-col p-4 space-y-1 ">
+          <li><a href="/" class="block px-3 py-2 text-lg font-medium hover:bg-gray-200 hover:text-[#233F4C] hover:font-bold duration-100 ease-in transform hover:-translate-x-1">Home</a></li>
+          <li><a href="/menu" class="block px-3 py-2 text-lg font-medium hover:bg-gray-200 hover:text-[#233F4C] hover:font-bold duration-100 ease-in transform hover:-translate-x-1">Our Menu</a></li>
+          <li><a href="/location" class="block px-3 py-2 text-lg font-medium hover:bg-gray-200 hover:text-[#233F4C] hover:font-bold duration-100 ease-in transform hover:-translate-x-1">Location</a></li>
+          <li><a href="/about" class="block px-3 py-2 text-lg font-medium hover:bg-gray-200 hover:text-[#233F4C] hover:font-bold duration-100 ease-in transform hover:-translate-x-1">About us</a></li>
+          <li class="pt-4"><a href="/menu" class="block text-center px-4 py-2 bg-[#B45F3D] text-white rounded-full font-bold hover:bg-[#785034]  duration-100 ease-in">Start an order</a></li>
         </ul>
       </nav>
 

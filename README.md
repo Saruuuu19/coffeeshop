@@ -41,8 +41,4 @@ This project was a practical exercise to master high-performance front-end archi
 
 | Color | Hex |
 | :--- | :--- |
-| **Light Coffee** | `#785034` |
-| **Green** | `#233F4C` |
-| **White** | `#F5F1E8` |
-| **Orange** | `#B45F3D` |
-| **Blue** | `#233F4C` |
+|

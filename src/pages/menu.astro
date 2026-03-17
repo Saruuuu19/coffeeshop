@@ -6,6 +6,7 @@
  */
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import AddToCartButton from "../components/AddToCartButton.jsx";
 import client from "../lib/contentful.js";
 // Tipos del SDK de Contentful para definir la forma de los campos
 import type { EntryFieldTypes, Asset } from "contentful";
@@ -18,10 +19,10 @@ import type { EntryFieldTypes, Asset } from "contentful";
 interface MenuItemSkeleton {
   contentTypeId: "menuItem";
   fields: {
-    name: EntryFieldTypes.Symbol;        // Texto corto (título del producto)
-    description: EntryFieldTypes.Text;   // Texto largo (descripción)
-    price: EntryFieldTypes.Number;       // Precio numérico
-    category: EntryFieldTypes.Symbol;    // Categoría para agrupar (ej: "Coffee", "Pastry")
+    name: EntryFieldTypes.Symbol; // Texto corto (título del producto)
+    description: EntryFieldTypes.Text; // Texto largo (descripción)
+    price: EntryFieldTypes.Number; // Precio numérico
+    category: EntryFieldTypes.Symbol; // Categoría para agrupar (ej: "Coffee", "Pastry")
     productImage: EntryFieldTypes.AssetLink; // Referencia a un asset (imagen)
     badge: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; // Etiquetas opcionales ("New", "Best Seller", etc.)
   };
@@ -37,14 +38,14 @@ interface MenuItem {
   price: number;
   category: string;
   imageUrl: string | null; // null si el producto no tiene imagen subida
-  badge: string[];         // Array de etiquetas (puede estar vacío)
+  badge: string[]; // Array de etiquetas (puede estar vacío)
 }
 
 // Petición a la API de Contentful (se ejecuta en build-time, no en el navegador).
 // El genérico <MenuItemSkeleton> le dice a TypeScript qué campos esperar.
 const response = await client.getEntries<MenuItemSkeleton>({
-  content_type: "menuItem",      // API Identifier del modelo en Contentful
-  order: ["fields.category"],    // Ordenar alfabéticamente por categoría
+  content_type: "menuItem", // API Identifier del modelo en Contentful
+  order: ["fields.category"], // Ordenar alfabéticamente por categoría
 });
 
 // Transformar la respuesta de Contentful a nuestro formato limpio (MenuItem[]).
@@ -104,8 +105,7 @@ const categories: string[] = [
               {menuItems
                 .filter((item) => item.category === category)
                 .map((item) => (
-                  /* Tarjeta de producto — "group" activa efectos hover en hijos con "group-hover:" */
-                  <article class="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden border border-gray-100">
+                  /* Tarjeta de producto — "group" activa efectos hover en hijos con "group-hover:" */ <article class="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden border border-gray-100">
                     {/* Badges: se apilan verticalmente si hay más de uno */}
                     {item.badge.length > 0 && (
                       <div class="absolute top-4 right-4 z-10 flex flex-col gap-1">
@@ -151,7 +151,7 @@ const categories: string[] = [
                     {/* Contenido de texto: nombre, precio, descripción y botón */}
                     <div class="p-6 flex flex-col grow">
                       <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold text-[#233F4C] leading-tight group-hover:text-[#B45F3D] transition-colors">
+                        <h3 class="text-xl font-bold text-[#265738] leading-tight transition-colors">
                           {item.name}
                         </h3>
                         <span class="text-xl font-bold text-[#265738]">
@@ -163,12 +163,14 @@ const categories: string[] = [
                         {item.description}
                       </p>
 
-                      <button class="w-full bg-[#233F4C] hover:bg-[#1a2f39] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-[#B45F3D] group-hover:shadow-lg transform active:scale-95">
-                        <span>Add to Order</span>
-                        <span class="material-icons text-sm">
-                          add_shopping_cart
-                        </span>
-                      </button>
+                      <AddToCartButton
+                        client:load
+                        item={{
+                          name: item.name,
+                          price: item.price,
+                          imageUrl: item.imageUrl,
+                        }}
+                      />
                     </div>
                   </article>
                 ))}

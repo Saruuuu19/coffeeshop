@@ -12,6 +12,7 @@
     "@astrojs/preact": "^5.0.0",
     "@iconify/tailwind": "^1.2.0",
     "@midudev/tailwind-animations": "^0.2.0",
+    "@preact/signals": "^2.8.2",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "^6.0.4",
     "contentful": "^11.8.12",

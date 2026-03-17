@@ -1,5 +1,6 @@
 ---
 import MobileMenu from "./MobileMenu.jsx";
+import CartIcon from "./CartIcon.jsx";
 ---
 
 <header
@@ -11,11 +12,13 @@ import MobileMenu from "./MobileMenu.jsx";
       >coffee</span
     >
     <span
-      class="font-bold text-xl text-[#233F4C] tracking-tight group-hover:text-[#B45F3D] transition-colors"
+      class="font-bold text-xl text-[#233F4C] tracking-tight group-hover:text-[#070504] transition-colors"
       >Coffee Shop</span
     >
   </a>
-  <nav>
+
+  <div class="flex items-center gap-4">
+    <CartIcon client:load />
     <MobileMenu client:load />
-  </nav>
+  </div>
 </header>
